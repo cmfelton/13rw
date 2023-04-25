@@ -1,4 +1,9 @@
-# 13rw
-Replication code for Felton working paper on 13 Reasons Why: https://osf.io/preprints/socarxiv/h8vgz
+# 13RW
 
-To get all time series used in the analysis, run tgclean.do and suppclean.do on the NEDS .csv files, and then run getcounts.R in the same directory. NEDS data is available for purchase here: https://hcup-us.ahrq.gov/nedsoverview.jsp. analysis.R will produce all the plots and tables in both the main paper and Appendix B using the .rds files produced by getcounts.R. sims.R will conduct the type-M, measurement error, and sample-splitting simulations. tgmisscount.do is for counting the number of observations before and after removing missing observations for the table in Appendix C.
+This is the replication package for Felton (2023), "*13 Reasons Why* Probably Increased Emergency Room Visits for Self-Harm among Teen Girls." Draft available here: https://osf.io/preprints/socarxiv/h8vgz/
+
+Because this code uses the here package, I recommend you keep the directory structure the same as it is on github. Begin by opening the ``.Rproj`` file ``13RW.Rproj``. This will create a clean ``R`` session with no packages loaded and it will set the working directory to location of ``13RW.Rproj``. 
+
+Assuming you've downloaded the ``.rds`` files from github (located in the data folder), you can start by running ``analysis_functions.R`` followed by ``analysis.R``. Be sure to install any packages you have not already installed. Code for doing so is commented out in the script. ``analysis.R`` will output all plots in the main text and supplement, with the exception of (a) the repeated placebo test procedure and (b) the simulations. These can be found in ``repeat_placebo.R`` and ``sims.R``. Be aware that these scripts take a long time to run. You likely don't want to run them all at once.
+
+If you want to replicate the ``.rds`` files from the NEDS data, you will have to obtain those ``.csv`` files from NEDS and place them in data folder. You will then have to run two Stata files: ``csv_to_dta_teen_girls.do`` and ``csv_to_dta_other.do``, in that order. Both take a while to run and require a lot of memory. The former takes longer to run. You'll then have to run ``cleaning_functions.R``, ``diagnosis_codes.R``, and ``get_counts.R``, in that order.
